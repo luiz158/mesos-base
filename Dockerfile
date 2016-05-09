@@ -2,10 +2,11 @@ FROM java:8-jdk
 MAINTAINER Alan Schegrer <flyinprogrammer@gmail.com>
 
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv E56151BF && \
-    . /etc/lsb-release && \
-    . /etc/os-release && \
-    echo "deb http://repos.mesosphere.com/${ID} ${DISTRIB_CODENAME} main" > /etc/apt/sources.list.d/mesosphere.list && \
-    apt-get -y update
+    echo "deb http://repos.mesosphere.com/debian jessie main" > /etc/apt/sources.list.d/mesosphere.list && \
+    apt-get -y update && \
+    apt-get -y install mesos && \
+    rm -rf /var/lib/{apt,dpkg,cache,log}
+
 
 ENV CP_VERSION=2.1.0 \
     CP_SHA1=0b073e857683bb7ea7cb662b4cc0cdb7c1b48cde
